@@ -22,7 +22,7 @@
 5. 清空里面的原有内容，将下方这段完整的代码全部复制并粘贴进去，然后点击右下角的“保存”：
 ### 配置文件
 <details>
-<summary>点击展开查看并复制代码</summary>
+<summary>点击展开</summary>
 
 
 ```javascript
