@@ -35,7 +35,7 @@ function main(config) {
   const adblockList = ["广告拦截", "AdBlock"];
   
   // 标识符 (默认为特殊空白符“U+FFA0”)
-  // 软件内添加代理组后，请精准复制括号内的隐藏字符（ﾠ），粘贴到代理组名称的尾部，例如：“🇨🇳 香港ﾠ”
+  // 软件内添加代理组后，请精准复制括号内的隐藏字符友军识别标识符（双击即可选中）：`ﾠ`，粘贴到代理组名称的尾部，例如：“🇨🇳 香港ﾠ”
   const watermark = "\uFFA0";
 
   const masterBucketName = "🚀 区域切换";
