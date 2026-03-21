@@ -19,58 +19,73 @@
 1. 打开 **Clash Verge**，点击左侧导航栏的“订阅”。
 2. 找到你想要修改的机场订阅，右键点击它，选择“编辑文件”，下滑找到诸如 `- { name: '🌏 国内网站',` 以及 `- { name: '广告拦截',` 的代码行。
 3. 将“🌏 国内网站”以及“广告拦截”名称完整复制进下方代码中的“直连代理组名单”以及“广告拦截组名单”中。完成后点击“取消”退出编辑（防止改动原代码）。
-4. 再次右键点击刚才的机场订阅，选择 **“扩展脚本”**。
+4. 再次右键点击刚才的机场订阅，选择 **“扩展脚本”**。*（不是全局扩展脚本）*
 5. 清空里面的原有内容，将下方这段完整的代码全部复制并粘贴进去，然后点击右下角的“保存”：
 
 ### 配置文件
-<details>
-<summary>点击展开查看并复制代码</summary>
+<details>   < details>
+<summary>点击展开查看并复制代码</summary>< summary> Click to expand to view and copy the code < /summary>
 
 
-```javascript
-function main(config) {
+```javascript   ”“javascript
+function main(config) {   function main(config) {   function main(config) {
+  // 主函数，接收配置参数
+}
+  // 主函数，接收配置参数
+}
 
   // 直连代理组名单（请在此添加原配置中的直连代理组名称）
-  const directList = ["🌏 国内网站", "CN"]; 
+  const directList = ["🌏 国内网站", "CN"]; const directList = ["🌏 Domestic Websites", "CN"] ;
   
   // 广告拦截组名单（若原配置有去广告组，请在此添加原配置中的广告拦截组名称）
-  const adblockList = ["广告拦截", "AdBlock"];
+  const adblockList = ["广告拦截", "AdBlock"];const adblockList = [" "AdBlock"] ;
   
   // 标识符 (默认为特殊空白符“U+FFA0”)
   // 软件内添加代理组后，请精准复制括号内的隐藏字符友军识别标识符（双击即可选中）：`ﾠ`，粘贴到代理组名称的尾部，例如：“🇨🇳 香港ﾠ”
-  const watermark = "\uFFA0";
+  const watermark = "\uFFA0";const 水印 = "\uFFA0"；
 
-  const masterBucketName = "🚀 区域切换";
-  const directBucketName = "🇨🇳 国内直连";
-  const adblockBucketName = "🚫 广告拦截";
-  const globalBucketName = "🌍 全球总库" + watermark;
+  const masterBucketName = "🚀 区域切换";const masterBucketName = " "Region Switch"
+  const directBucketName = "🇨🇳 国内直连";const directBucketName = " Direct connection within China
+  const adblockBucketName = "🚫 广告拦截";const adblockBucketName = " "Ad blocking"
+  const globalBucketName = "🌍 全球总库" + watermark;const globalBucketName = " "Global Total Repository" watermark;
 
-  const proxies = config.proxies || [];
-  const proxyNames = proxies.map(p => p.name);
+  const proxies = config.proxies || [];const 代理服务器 = 配置.代理
+  const proxyNames = proxies.map(p => p.name);const 代理名称 = 代理.map(p => p.name)；
 
-  const existingGroups = config["proxy-groups"] || [];
-  const keptGroups = existingGroups.filter(g => g.name.includes(watermark));
-  const keptGroupNames = keptGroups.map(g => g.name);
+  const existingGroups = config["proxy-groups"] || [];const existingGroups = config["proxy-groups"] || []； 
 
-  const globalGroup = {
+// 翻译成中文：
+const existingGroups = config["代理
+  const keptGroups = existingGroups.filter(g => g.name.includes(watermark));const keptGroups = existingGroups.filter(g => g.name.includes(watermark)); 
+
+const keptGroups = existingGroups.filter(function (g) { return g.name.includes(watermark); });const keptGroups = existingGroups.filter(function (g) { return g.name.includes(watermark); })；
+
+const keptGroups = existingGroups.filter(function (g) { return g.name.includes(watermark); });  // 保留包含水印的现有});
+  const keptGroupNames = keptGroups.map(g => g.name);const keptGroupNames = keptGroups.map(g => g.name)； 
+
+// 翻译为：
+
+const keptGroupNames = keptGroups.map( g => g.name )；
+
+  const globalGroup = {   const 全局组 = {
     name: globalBucketName,
-    type: "select",
-    proxies: proxyNames.length > 0 ? proxyNames : ["DIRECT"]
+    type: "select",   type: "select",
+    proxies: proxyNames.length > 0 ? proxyNames : ["DIRECT"]proxies: proxyNames.length > 0 ? proxyNames : ["DIRECT"]
   };
 
   const masterGroup = {
-    name: masterBucketName,
-    type: "select",
-    proxies: [...keptGroupNames, globalBucketName]
+    name: masterBucketName,   名称：主存储桶名称，
+    type: "select",   type: "select",
+    proxies: [...keptGroupNames, globalBucketName]代理：[...保留组名称，全局存储桶名称]
   };
 
-  const directGroup = {
-    name: directBucketName,
-    type: "select",
-    proxies: ["DIRECT", masterBucketName]
+  const directGroup = {   const 直接分组 = {
+    name: directBucketName,   名称：直接存储桶名称
+    type: "select",   type: "select",
+    proxies: ["DIRECT", masterBucketName]代理：[" 主存储桶名称]
   };
 
-  const adblockGroup = {
+  const adblockGroup = {   const 广告拦截组 = {
     name: adblockBucketName,
     type: "select",
     proxies: ["REJECT", "DROP", masterBucketName, "DIRECT"]
@@ -100,7 +115,9 @@ function main(config) {
         let originalTarget = parts[targetIndex].trim();
 
         if (originalTarget === "DIRECT" || originalTarget === "REJECT" || originalTarget === "DROP") {
-        }
+        }const keptGroups = existingGroups.filter(g => g.name.includes(watermark)); 
+
+const keptGroups = existingGroups.filter(function (g) { return g.name.includes(watermark); });
         else if (directList.includes(originalTarget)) {
           parts[targetIndex] = directBucketName;
         }
