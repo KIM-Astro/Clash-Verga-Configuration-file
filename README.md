@@ -23,7 +23,7 @@
 
 ### 配置文件
 <details>
-<summary>点击展开</summary>或者[点击此处下载最新的 .js 脚本文件](./Clash-Verge-Script.js)。
+<summary>点击展开</summary>
 
 
 ```javascript
@@ -119,6 +119,8 @@ function main(config) {
 }
 ```
 </details>
+
+或者[点击此处下载最新的 .js 脚本文件](./Clash-Verge-Script.js)。
 
 ### 第二步：建立你的目标地区组
 这段代码会消除机场自带的杂乱分组，同时会保留你自己建立的分组。为了防止建立的分组被消除，我们需要在你建立的分组后加入一段友军识别标识符。
