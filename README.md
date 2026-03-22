@@ -28,7 +28,6 @@
 <details>
 <summary>点击展开查看并复制代码</summary>
 
-
 ```javascript
 function main(config) {
 
