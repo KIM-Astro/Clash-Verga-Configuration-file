@@ -30,64 +30,50 @@
 
 
 ```javascript
-function main(config) {   function main(config) {   function main(config) {
-  // 主函数，接收配置参数
-}
-  // 主函数，接收配置参数
-}
+function main(config) {
 
   // 直连代理组名单（请在此添加原配置中的直连代理组名称）
-  const directList = ["🌏 国内网站", "CN"]; const directList = ["🌏 Domestic Websites", "CN"] ;
+  const directList = ["🌏 国内网站", "CN"]; 
   
   // 广告拦截组名单（若原配置有去广告组，请在此添加原配置中的广告拦截组名称）
-  const adblockList = ["广告拦截", "AdBlock"];const adblockList = [" "AdBlock"] ;
+  const adblockList = ["广告拦截", "AdBlock"];
   
-  // 标识符 (默认为特殊空白符“U+FFA0”)
-  // 软件内添加代理组后，请精准复制括号内的隐藏字符友军识别标识符（双击即可选中）：`ﾠ`，粘贴到代理组名称的尾部，例如：“🇨🇳 香港ﾠ”
-  const watermark = "\uFFA0";const 水印 = "\uFFA0"；
+  // 标识符 (默认为空白符“U+FFA0”)
+  // 软件内添加代理组后，请精准复制括号内的隐藏字符（ﾠ），粘贴到代理组名称的尾部，例如：“🇨🇳 香港ﾠ”
+  const watermark = "\uFFA0";
 
-  const masterBucketName = "🚀 区域切换";const masterBucketName = " "Region Switch"
-  const directBucketName = "🇨🇳 国内直连";const directBucketName = " Direct connection within China
-  const adblockBucketName = "🚫 广告拦截";const adblockBucketName = " "Ad blocking"
-  const globalBucketName = "🌍 全球总库" + watermark;const globalBucketName = " "Global Total Repository" watermark;
+  const masterBucketName = "🚀 区域切换";
+  const directBucketName = "🇨🇳 国内直连";
+  const adblockBucketName = "🚫 广告拦截";
+  const globalBucketName = "🌍 全球总库" + watermark;
 
-  const proxies = config.proxies || [];const 代理服务器 = 配置.代理
-  const proxyNames = proxies.map(p => p.name);const 代理名称 = 代理.map(p => p.name)；
+  const proxies = config.proxies || [];
+  const proxyNames = proxies.map(p => p.name);
 
-  const existingGroups = config["proxy-groups"] || [];const existingGroups = config["proxy-groups"] || []； 
+  const existingGroups = config["proxy-groups"] || [];
+  const keptGroups = existingGroups.filter(g => g.name.includes(watermark));
+  const keptGroupNames = keptGroups.map(g => g.name);
 
-// 翻译成中文：
-const existingGroups = config["代理
-  const keptGroups = existingGroups.filter(g => g.name.includes(watermark));const keptGroups = existingGroups.filter(g => g.name.includes(watermark)); 
-
-const keptGroups = existingGroups.filter(function (g) { return g.name.includes(watermark); });const keptGroups = existingGroups.filter(function (g) { return g.name.includes(watermark); })；
-
-const keptGroups = existingGroups.filter(function (g) { return g.name.includes(watermark); });  // 保留包含水印的现有});
-  const keptGroupNames = keptGroups.map(g => g.name);const keptGroupNames = keptGroups.map(g => g.name)； 
-
-// 翻译为：
-
-const keptGroupNames = keptGroups.map( g => g.name )；
-
-  const globalGroup = {   const 全局组 = {
+  const globalGroup = {
     name: globalBucketName,
-    type: "select",   type: "select",
-    proxies: proxyNames.length > 0 ? proxyNames : ["DIRECT"]proxies: proxyNames.length > 0 ? proxyNames : ["DIRECT"]
+    type: "select",
+
+    proxies: proxyNames.length > 0 ? proxyNames : ["DIRECT"]
   };
 
   const masterGroup = {
-    name: masterBucketName,   名称：主存储桶名称，
-    type: "select",   type: "select",
-    proxies: [...keptGroupNames, globalBucketName]代理：[...保留组名称，全局存储桶名称]
+    name: masterBucketName,
+    type: "select",
+    proxies: [...keptGroupNames, globalBucketName]
   };
 
-  const directGroup = {   const 直接分组 = {
-    name: directBucketName,   名称：直接存储桶名称
-    type: "select",   type: "select",
-    proxies: ["DIRECT", masterBucketName]代理：[" 主存储桶名称]
+  const directGroup = {
+    name: directBucketName,
+    type: "select",
+    proxies: ["DIRECT", masterBucketName]
   };
 
-  const adblockGroup = {   const 广告拦截组 = {
+  const adblockGroup = {
     name: adblockBucketName,
     type: "select",
     proxies: ["REJECT", "DROP", masterBucketName, "DIRECT"]
@@ -106,6 +92,7 @@ const keptGroupNames = keptGroups.map( g => g.name )；
       let parts = rule.split(',');
       let targetIndex = -1;
 
+
       if (parts.length >= 3 && !rule.trim().startsWith("MATCH") && !rule.trim().startsWith("FINAL")) {
         targetIndex = 2;
       } 
@@ -117,9 +104,7 @@ const keptGroupNames = keptGroups.map( g => g.name )；
         let originalTarget = parts[targetIndex].trim();
 
         if (originalTarget === "DIRECT" || originalTarget === "REJECT" || originalTarget === "DROP") {
-        }const keptGroups = existingGroups.filter(g => g.name.includes(watermark)); 
-
-const keptGroups = existingGroups.filter(function (g) { return g.name.includes(watermark); });
+        }
         else if (directList.includes(originalTarget)) {
           parts[targetIndex] = directBucketName;
         }
