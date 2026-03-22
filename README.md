@@ -29,7 +29,7 @@
 <summary>点击展开查看并复制代码< /summary>
 
 
-```javascript   ”“javascript
+```javascript
 function main(config) {   function main(config) {   function main(config) {
   // 主函数，接收配置参数
 }
